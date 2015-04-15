@@ -5,7 +5,7 @@ cd $(dirname "${BASH_SOURCE[0]}")
 ## if directory is empty
 sudo systemctl stop machine
 rm -rf /machine && mkdir /machine
-docker build -t machine /projects/developement/tony
+docker build -t machine /projects/development-environment/profile/tony
 docker export "$(docker create --name machine machine true)" | tar -x -C /machine
 docker rm machine
 docker rmi machine
