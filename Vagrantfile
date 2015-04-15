@@ -66,18 +66,6 @@ Vagrant.configure("2") do |config|
       :inline     => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", 
       :privileged => true
 
-    config.vm.provision :shell, 
-      :inline     => "echo PUBLIC_IP=172.17.8.100 >> /etc/metadata", 
-      :privileged => true
-
-    config.vm.provision :shell, 
-      :inline     => "echo PRIVATE_IP=192.168.11.100 >> /etc/metadata", 
-      :privileged => true
-
-    config.vm.provision :shell, 
-      :inline     => "echo SHARED_DATA=/mnt/shared >> /etc/metadata", 
-      :privileged => true
-
     config.vm.provision :shell, path: "provision.sh"
   end
 
