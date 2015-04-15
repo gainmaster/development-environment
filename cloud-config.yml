@@ -1,0 +1,43 @@
+#cloud-config
+
+coreos:
+  etcd:
+    addr: $public_ipv4:4001
+    peer-addr: $public_ipv4:7001
+    discovery: https://discovery.etcd.io/<token>
+  fleet:
+    public-ip: $public_ipv4
+  units:
+  - name: etcd.service
+    command: start
+  - name: fleet.service
+    command: start
+  - name: docker.socket
+    command: start
+    drop-ins: 
+    - name: 30-ListenStream.conf
+      content: |
+        [Socket]
+        ListenStream=$public_ipv4:2375
+  - name: machine.service
+    content: |
+      [Unit]
+      Description=machine
+      After=docker.service
+      Requires=docker.service
+      [Service]
+      ExecStart=/bin/bash -c 'sudo systemd-nspawn --machine gainmaster --quiet --keep-unit --boot --link-journal=guest --directory /machine --bind /usr/bin/docker --bind /usr/bin/etcdctl --bind /usr/bin/fleetctl --bind /projects'
+      ExecStop=/bin/bash -c 'sudo machinectl terminate machine'
+      TimeoutStartSec=0
+      Restart=always
+      RestartSec=10s
+      [Install]
+      WantedBy=multi-user.target
+
+write_files:
+  - path: /etc/metadata
+    permissions: 0644
+    content: |
+      PUBLIC_IPV4=$public_ipv4
+      PRIVATE_IPV4=$private_ipv4
+      SHARED_DATA=/mnt/shared
