@@ -39,7 +39,7 @@ To manualy access the development machine, first get into CoreOS with `vagrant s
 * `gainmaster coreos` -> SSH into CoreOS machine *(vagrant ssh)*
 * `gainmaster login` -> SSH into developer machine inside of CoreOS
 * `gainmaster start` -> Start CoreOS and developer machine *(vagrant up)*
-* `gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)*
+* `gainmaster stop` ->  Stop CoreOS and developer machin *(vagrant halt)*
 * `gainmaster stop-force` ->  Same as taking the power out of CoreOS *(vagrant halt --force)*
 * `gainmaster destroy` ->  Destroys CoreOS *(vagrant destroy)*
 * `gainmaster status` -> Get CoreOS status *(Running / Not running)*
