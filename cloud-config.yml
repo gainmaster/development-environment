@@ -2,11 +2,11 @@
 
 coreos:
   etcd:
-    addr: $public_ipv4:4001
-    peer-addr: $public_ipv4:7001
+    addr: $private_ipv4:4001
+    peer-addr: $private_ipv4:7001
     discovery: https://discovery.etcd.io/<token>
   fleet:
-    public-ip: $public_ipv4
+    public-ip: $private_ipv4
   units:
   - name: etcd.service
     command: start
@@ -18,7 +18,7 @@ coreos:
     - name: 30-ListenStream.conf
       content: |
         [Socket]
-        ListenStream=$public_ipv4:2375
+        ListenStream=$private_ipv4:2375
   - name: machine.service
     content: |
       [Unit]

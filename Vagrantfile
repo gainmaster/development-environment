@@ -45,16 +45,15 @@ Vagrant.configure("2") do |config|
   config.vm.define vm_name = "gainmaster-coreos" do |config|
     config.vm.hostname = vm_name
 
-    config.vm.network :private_network, ip: "172.17.8.100"
     config.vm.network :private_network, ip: "192.168.11.100"
 
     config.vm.network :forwarded_port, guest: 8888, host: 8888
     config.vm.network :forwarded_port, guest: 9999, host: 9999
 
-    
+    config.vm.network :forwarded_port, guest: 2200, host: 2200
+
     config.vm.synced_folder "../", "/projects", 
       id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-      
 
     config.vm.provision :file, 
       :source      => "#{CLOUD_CONFIG_LOCAL_FILE}", 

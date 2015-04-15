@@ -2,8 +2,9 @@
 
 cd $(dirname "${BASH_SOURCE[0]}")
 
-## if directory is empty
 sudo su
+
+## if directory is empty
 systemctl stop machine
 rm -rf /machine && mkdir /machine
 docker build -t machine /projects/development-environment/profile/tony
@@ -17,13 +18,13 @@ systemctl start machine
 . <(sed '/^export/!s/^/export /' "/etc/metadata")
 
 # Enable access to CoreOS docker
-echo "Adding DOCKER_HOST to /etc/environment"
-echo "DOCKER_HOST=tcp://${PUBLIC_IPV4}:2376" >> /machine/etc/environment
+echo "Adding DOCKER_HOST to environment"
+echo "DOCKER_HOST=tcp://${PUBLIC_IPV4}:2375" >> /machine/etc/environment
 
 # Enable access to CoreOS etcdctl
-echo "Adding ETCDCTL_PEERS to /etc/environment"
+echo "Adding ETCDCTL_PEERS to environment"
 echo "ETCDCTL_PEERS=http://${PUBLIC_IPV4}:4001" >> /machine/etc/environment
 
 # Enable access to CoreOS fleetctl
-echo "Adding FLEETCTL_ENDPOINT to /etc/environment"
+echo "Adding FLEETCTL_ENDPOINT to environment"
 echo "FLEETCTL_ENDPOINT=http://${PUBLIC_IPV4}:4001" >> /machine/etc/environment
