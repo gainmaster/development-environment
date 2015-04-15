@@ -16,7 +16,7 @@ This repository contains **Dockerfiles** for development machines, and a **Vagra
 
 ### Install
 
-Installation is realy simple, just run:
+Installation is really simple, just run:
 
     $ sudo ./install.sh <profile>
 
