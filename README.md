@@ -36,22 +36,22 @@ To manualy access the development machine, first get into CoreOS with `vagrant s
 
 ### Usage
 
-* `gainmaster coreos` -> SSH into CoreOS machine (vagrant ssh)
+* `gainmaster coreos` -> SSH into CoreOS machine *(vagrant ssh)*
 * `gainmaster login` -> SSH into developer machine inside of CoreOS
-* `gainmaster start` -> Start CoreOS and developer machine (vagrant up)
-* `gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)
-* `gainmaster stop-force` ->  Same as taking the power out of CoreOS (vagrant halt --force)
-* `gainmaster destroy` ->  Destroys CoreOS (vagrant destroy)
-* `gainmaster status` -> Get CoreOS status (Running / Not running)
+* `gainmaster start` -> Start CoreOS and developer machine *(vagrant up)*
+* `gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)*
+* `gainmaster stop-force` ->  Same as taking the power out of CoreOS *(vagrant halt --force)*
+* `gainmaster destroy` ->  Destroys CoreOS *(vagrant destroy)*
+* `gainmaster status` -> Get CoreOS status *(Running / Not running)*
 
 ## Refrences
 
 These resources have been helpful when creating this repository:
 
-* [Youtube: PlayStation - Developing Applications on CoreOS.][playstation_developing_applications_on_coreos]
-* [GitHub: CoreOS's repository for CoreOS Vagrant.][github_repository_coreos_coreos_vagrant]
-* [systemd-nspawn documentation.][systemd-nspawn_documentation]
-* [ArchLinux Wiki: systemd-nspawn.][archlinux_wiki_systemd_nspawn]
+* [Youtube: PlayStation - Developing Applications on CoreOS][playstation_developing_applications_on_coreos]
+* [GitHub: CoreOS's repository for CoreOS Vagrant][github_repository_coreos_coreos_vagrant]
+* [systemd-nspawn documentation][systemd-nspawn_documentation]
+* [ArchLinux Wiki: systemd-nspawn][archlinux_wiki_systemd_nspawn]
 
 [playstation_developing_applications_on_coreos]: https://www.youtube.com/watch?v=M9hBsRUeRdg
 [github_repository_coreos_coreos_vagrant]: https://github.com/coreos/coreos-vagrant
