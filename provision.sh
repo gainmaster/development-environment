@@ -2,12 +2,19 @@
 
 cd $(dirname "${BASH_SOURCE[0]}")
 
+if [ -z "$1" ]; then 
+	exit 2 
+fi
+if [ ! -d "/projects/development-environment/profile/$1" ]; then 
+	exit 2 
+fi
+
 sudo su
 
 ## if directory is empty
 systemctl stop machine
 rm -rf /machine && mkdir /machine
-docker build -t machine /projects/development-environment/profile/tony
+docker build -t machine /projects/development-environment/profile/$1
 docker export "$(docker create --name machine machine true)" | tar -x -C /machine
 docker rm machine
 docker rmi machine

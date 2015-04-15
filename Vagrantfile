@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
       :inline     => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", 
       :privileged => true
 
-    config.vm.provision :shell, path: "provision.sh"
+    config.vm.provision :shell, path: "provision.sh", args: ENV['GAINMASTER_PROFILE']
   end
 
 end
