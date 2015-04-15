@@ -5,6 +5,5 @@ RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN echo "Port 2200" >> /etc/ssh/sshd_config
 
 RUN systemctl enable sshd
-RUN systemctl start sshd
 
 ADD add-user.sh /usr/bin/add-user
