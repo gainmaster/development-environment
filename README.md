@@ -20,7 +20,7 @@ Installation is realy simple, just run:
 
     $ sudo ./install.sh <profile>
 
-This creates a vagrant wrapper script **gainmaster** and places it in /usr/local/bin, which should be on your $PATH.
+This creates a vagrant wrapper script **gainmaster** and places it in */usr/local/bin*, which should be on your path.
 
 ## Wrapper script
 
@@ -30,19 +30,19 @@ By using a wrapper script we can simplify the proccess of building and accessing
 - Get easy access to the inner development machin
 - Can access the machine from wherever you are in the terminal
 
-If you don't want to use the wrapper, you must have $GAINMASTER_PROFILE in your environment.
+If you don't want to use the wrapper, you must have **$GAINMASTER_PROFILE** in your environment.
 
-To manualy access the development machine, first get into CoreOS with `vagrant ssh`, then enter development machine with `sudo machinectl login gainmaster`. Alternatively you can access it with SSH: `ssh -p 2200 <profile>@127.0.0.1'
+To manualy access the development machine, first get into CoreOS with `vagrant ssh`, then enter development machine with `sudo machinectl login gainmaster`. Alternatively you can access it with: `ssh -p 2200 <profile>@127.0.0.1`
 
 ### Usage
 
-`gainmaster coreos` -> SSH into CoreOS machine (vagrant ssh)
-`gainmaster login` -> SSH into developer machine inside of CoreOS
-`gainmaster start` -> Start CoreOS and developer machine (vagrant up)
-`gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)
-`gainmaster stop-force` ->  Same as taking the power out of CoreOS (vagrant halt --force)
-`gainmaster destroy` ->  Destroys CoreOS (vagrant destroy)
-`gainmaster status` -> Get CoreOS status (Running / Not running)
+* `gainmaster coreos` -> SSH into CoreOS machine (vagrant ssh)
+* `gainmaster login` -> SSH into developer machine inside of CoreOS
+* `gainmaster start` -> Start CoreOS and developer machine (vagrant up)
+* `gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)
+* `gainmaster stop-force` ->  Same as taking the power out of CoreOS (vagrant halt --force)
+* `gainmaster destroy` ->  Destroys CoreOS (vagrant destroy)
+* `gainmaster status` -> Get CoreOS status (Running / Not running)
 
 ## Refrences
 
