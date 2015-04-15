@@ -20,6 +20,10 @@ These resources have been helpful when creating this repository:
 
 * [Youtube: PlayStation - Developing Applications on CoreOS.][playstation_developing_applications_on_coreos]
 * [GitHub: CoreOS's repository for CoreOS Vagrant.][github_repository_coreos_coreos_vagrant]
+* [systemd-nspawn documentation.][systemd-nspawn_documentation]
+* [ArchLinux Wiki: systemd-nspawn.][archlinux_wiki_systemd_nspawn]
 
 [playstation_developing_applications_on_coreos]: https://www.youtube.com/watch?v=M9hBsRUeRdg
 [github_repository_coreos_coreos_vagrant]: https://github.com/coreos/coreos-vagrant
+[archlinux_wiki_systemd_nspawn]: https://wiki.archlinux.org/index.php/Systemd-nspawn
+[systemd-nspawn_documentation]: http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html
