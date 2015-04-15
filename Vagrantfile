@@ -54,9 +54,7 @@ Vagrant.configure("2") do |config|
     
     config.vm.synced_folder "../", "/projects", 
       id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-
-    #config.vm.synced_folder "./machine", "/machine", 
-    #  id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+      
 
     config.vm.provision :file, 
       :source      => "#{CLOUD_CONFIG_LOCAL_FILE}", 
