@@ -18,7 +18,7 @@ This repository contains **Dockerfiles** for development machines, and a **Vagra
 
 Installation is really simple, just run:
 
-    $ sudo ./install.sh <profile>
+    $ ./install.sh <profile>
 
 This creates a vagrant wrapper script **gainmaster** and places it in */usr/local/bin*, which should be on your path.
 

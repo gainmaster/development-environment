@@ -26,7 +26,7 @@ coreos:
       After=docker.service
       Requires=docker.service
       [Service]
-      ExecStart=/bin/bash -c 'sudo systemd-nspawn --machine gainmaster --quiet --keep-unit --boot --link-journal=guest --directory /machine --bind /usr/bin/docker --bind /usr/bin/etcdctl --bind /usr/bin/fleetctl --bind /projects'
+      ExecStart=/bin/bash -c 'sudo systemd-nspawn --machine gainmaster --quiet --keep-unit --boot --link-journal=guest --directory /machine --bind /usr/bin/docker --bind /usr/bin/etcdctl --bind /usr/bin/fleetctl --bind /projects systemctl start sshd'
       ExecStop=/bin/bash -c 'sudo machinectl terminate machine'
       TimeoutStartSec=0
       Restart=always
