@@ -34,7 +34,7 @@ function test_base_image() {
 
 	docker history "${IMAGE_NAME}:${base_image}" 2> /dev/null
 
-	if [ $? -eq 1]; then
+	if [ $? -eq 1 ]; then
 		echo "Unable to test ${IMAGE_NAME}:${base_image}, the image does not exist."
         exit 1
     fi
