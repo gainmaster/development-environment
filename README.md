@@ -1,10 +1,10 @@
-# Developement Environment
+# Development Environment
 
 [![Build Status](http://jenkins.hesjevik.im/buildStatus/icon?job=development-environment)](http://jenkins.hesjevik.im/job/development-environment/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg?style=plastic)][docker_hub_repository]
 
-This repository contains **Dockerfiles** for developement machines, and a **Vagrantfile** for a local CoreOS instance. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
+This repository contains **Dockerfiles** for development machines, and a **Vagrantfile** for a local CoreOS instance. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
 
-[docker_hub_repository]: https://registry.hub.docker.com/u/bachelorthesis/developement-environment/
+[docker_hub_repository]: https://registry.hub.docker.com/u/bachelorthesis/development-environment/
 
 ### Dependencies
 
@@ -13,6 +13,36 @@ This repository contains **Dockerfiles** for developement machines, and a **Vagr
 
 [virtualbox]: https://www.virtualbox.org/
 [vagrant]: https://www.vagrantup.com/
+
+### Install
+
+Installation is realy simple, just run:
+
+    $ sudo ./install.sh <profile>
+
+This creates a vagrant wrapper script **gainmaster** and places it in /usr/local/bin, which should be on your $PATH.
+
+## Wrapper script
+
+By using a wrapper script we can simplify the proccess of building and accessing the inner development machine. We created a wrapper script so that you:
+
+- Don't have to save the profile name in your environment
+- Get easy access to the inner development machin
+- Can access the machine from wherever you are in the terminal
+
+If you don't want to use the wrapper, you must have $GAINMASTER_PROFILE in your environment.
+
+To manualy access the development machine, first get into CoreOS with `vagrant ssh`, then enter development machine with `sudo machinectl login gainmaster`. Alternatively you can access it with SSH: `ssh -p 2200 <profile>@127.0.0.1'
+
+### Usage
+
+`gainmaster coreos` -> SSH into CoreOS machine (vagrant ssh)
+`gainmaster login` -> SSH into developer machine inside of CoreOS
+`gainmaster start` -> Start CoreOS and developer machine (vagrant up)
+`gainmaster stop` ->  Stop CoreOS and developer machin (vagrant halt)
+`gainmaster stop-force` ->  Same as taking the power out of CoreOS (vagrant halt --force)
+`gainmaster destroy` ->  Destroys CoreOS (vagrant destroy)
+`gainmaster status` -> Get CoreOS status (Running / Not running)
 
 ## Refrences
 
