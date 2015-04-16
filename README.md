@@ -34,6 +34,14 @@ If you don't want to use the wrapper, you must have **$GAINMASTER_PROFILE** in y
 
 To manualy access the development machine, first get into CoreOS with `vagrant ssh`, then enter development machine with `sudo machinectl login gainmaster`. Alternatively you can access it with: `ssh -p 2200 <profile>@127.0.0.1`
 
+## DNS
+
+To take full use of the internal DNS you should add it as a static DNS resolver on your host.
+
+- 192.168.11.100
+- 8.8.8.8
+- 8.8.4.4
+
 ### Usage
 
 * `gainmaster coreos` -> SSH into CoreOS machine *(vagrant ssh)*
