@@ -7,3 +7,7 @@ RUN echo "Port 2200" >> /etc/ssh/sshd_config
 RUN systemctl enable sshd
 
 ADD add-user.sh /usr/bin/add-user
+
+ADD ondir-0.2.2-3-x86_64.pkg.tar.xz ./
+RUN sudo pacman -U ondir-0.2.2-3-x86_64.pkg.tar.xz --noconfirm
+RUN rm ondir-0.2.2-3-x86_64.pkg.tar.xz

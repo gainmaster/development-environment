@@ -1,0 +1,13 @@
+enter /projects/gainmaster-web-client
+  alias bower=/projects/gainmaster-web-client/toolbox/bower.sh
+  alias grunt=/projects/gainmaster-web-client/toolbox/grunt.sh
+  alias node=/projects/gainmaster-web-client/toolbox/node.sh
+  alias npm=/projects/gainmaster-web-client/toolbox/npm.sh
+  alias yo=/projects/gainmaster-web-client/toolbox/yo.sh
+
+leave /projects/gainmaster-web-client
+  unalias bower
+  unalias grunt
+  unalias node
+  unalias npm
+  unalias yo
