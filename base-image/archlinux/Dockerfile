@@ -8,6 +8,6 @@ RUN systemctl enable sshd
 
 ADD add-user.sh /usr/bin/add-user
 
-ADD ondir-0.2.2-3-x86_64.pkg.tar.xz /tmp/
-RUN sudo pacman -U /tmp/ondir-0.2.2-3-x86_64.pkg.tar.xz --noconfirm
+ADD ./ondir-0.2.2-3-x86_64.pkg.tar.xz /tmp/
+RUN pacman -U /tmp/ondir-0.2.2-3-x86_64.pkg.tar.xz --noconfirm
 RUN rm /tmp/ondir-0.2.2-3-x86_64.pkg.tar.xz
