@@ -76,6 +76,7 @@ case "$1" in
         if [ "$stat" == "Not running" ]; then
             cd $GAINMASTER_DIRECTORY
             vagrant up
+            sleep 5
         fi
         ;;
 esac

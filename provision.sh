@@ -12,14 +12,14 @@ fi
 sudo su
 
 ## if directory is empty
-systemctl stop machine
+systemctl stop dev-machine
 rm -rf /machine && mkdir /machine
 docker build -t machine /projects/development-environment/profile/$1
 docker export "$(docker create --name machine machine true)" | tar -x -C /machine
 docker rm machine
 docker rmi machine
-systemctl enable machine
-systemctl start machine
+systemctl enable dev-machine
+systemctl start dev-machine
 
 # Load host spesific envorinment
 . <(sed '/^export/!s/^/export /' "/etc/metadata")

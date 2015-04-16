@@ -35,6 +35,7 @@ Vagrant.configure("2") do |config|
     # in CoreOS, so tell Vagrant that so it can be smarter.
     v.check_guest_additions = false
     v.functional_vboxsf     = false
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
   # Plugin conflict
@@ -47,9 +48,8 @@ Vagrant.configure("2") do |config|
 
     config.vm.network :private_network, ip: "192.168.11.100"
 
-    config.vm.network :forwarded_port, guest: 8888, host: 8888
-    config.vm.network :forwarded_port, guest: 9999, host: 9999
-
+    config.vm.network :forwarded_port, guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 9000, host: 9000
     config.vm.network :forwarded_port, guest: 2200, host: 2200
 
     config.vm.synced_folder "../", "/projects", 

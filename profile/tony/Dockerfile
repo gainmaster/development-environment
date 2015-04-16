@@ -10,8 +10,11 @@ ADD ./ ./
 RUN \
   git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh && \
   rm Dockerfile && \
-  chown tony:tony .oh-my-zsh && \
-  chmod 644 .oh-my-zsh && \
+  chown tony:tony .zshrc && \
+  chmod 644 .zshrc && \
+  chown tony:tony .screenrc && \
+  chmod 644 .screenrc && \
+  chown tony:tony .gitconfig && \
   chmod 644 .gitconfig && \
   chown tony:tony .ssh && \
   chmod 700 .ssh && \
