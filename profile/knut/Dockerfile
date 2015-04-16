@@ -1,7 +1,7 @@
 FROM bachelorthesis/development-environment:archlinux
 
 RUN pacman-install nano
-RUN add-user knut
+RUN add-user knut /usr/bin/bash
 
 USER knut
 
