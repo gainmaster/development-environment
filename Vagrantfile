@@ -35,7 +35,6 @@ Vagrant.configure("2") do |config|
     # in CoreOS, so tell Vagrant that so it can be smarter.
     v.check_guest_additions = false
     v.functional_vboxsf     = false
-    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
   # Plugin conflict
