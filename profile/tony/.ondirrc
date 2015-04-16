@@ -1,13 +1,20 @@
-enter /projects/gainmaster-web-client
-  alias bower=/projects/gainmaster-web-client/toolbox/bower.sh
-  alias grunt=/projects/gainmaster-web-client/toolbox/grunt.sh
-  alias node=/projects/gainmaster-web-client/toolbox/node.sh
-  alias npm=/projects/gainmaster-web-client/toolbox/npm.sh
-  alias yo=/projects/gainmaster-web-client/toolbox/yo.sh
-
-leave /projects/gainmaster-web-client
-  unalias bower
-  unalias grunt
-  unalias node
-  unalias npm
-  unalias yo
+enter /projects/([^/]+)                                                                  
+  if [ -d "${PWD}/toolbox" ]; then                                                       
+    for tool_file in ${PWD}/toolbox/*; do                                                
+      if [[ $tool_file == *.sh ]]; then                                                  
+        tool=$(basename ${tool_file%.sh})                                                
+        alias ${tool}=${tool_file}                                                       
+      fi                                                                                 
+    done                                                                                 
+  fi                                                                                     
+                                                                                         
+                                                                                         
+leave /projects/([^/]+)                                                                  
+  if [ -d "/projects/${1}/toolbox" ]; then                                               
+    for tool_file in /projects/${1}/toolbox/*; do                                        
+      if [[ $tool_file == *.sh ]]; then                                                  
+        tool=$(basename ${tool_file%.sh})                                                
+        unalias ${tool}                                                                  
+      fi                                                                                 
+    done                                                                                 
+  fi     
