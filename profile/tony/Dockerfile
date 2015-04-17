@@ -6,10 +6,8 @@ RUN add-user tony /usr/bin/zsh
 USER tony
 
 WORKDIR /home/tony
-ADD ./ ./
+COPY ./ ./
 
-# base-devel ?
-#RUN sudo pacman -U ondir-0.2.2-3-x86_64.pkg.tar.xz --noconfirm
 RUN \
   git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh && \
   rm Dockerfile && \
