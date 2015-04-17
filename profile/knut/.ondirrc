@@ -1,0 +1,20 @@
+enter /projects/([^/]+)
+  if [ -d "${PWD}/toolbox" ]; then
+    for tool_file in ${PWD}/toolbox/*; do
+      if [[ $tool_file == *.sh ]]; then
+        tool=$(basename ${tool_file%.sh})
+        alias ${tool}=${tool_file}
+      fi
+    done
+  fi
+
+
+leave /projects/([^/]+)
+  if [ -d "/projects/${1}/toolbox" ]; then
+    for tool_file in /projects/${1}/toolbox/*; do
+      if [[ $tool_file == *.sh ]]; then
+        tool=$(basename ${tool_file%.sh})
+        unalias ${tool}
+      fi
+    done
+  fi
