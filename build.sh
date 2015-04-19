@@ -94,7 +94,7 @@ while getopts ":v:" opt; do
 done
 
 if [ ${#versions[@]} -eq 0 ]; then
-    for version in ${BASE_IMAGES_DIRECTORY}/*; do
+    for version in ${MACHINE_DIRECTORY}/*; do
         versions+=($(basename $(echo $version)))
     done
 fi
