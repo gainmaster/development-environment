@@ -107,19 +107,19 @@ for action in "${actions[@]}"; do
     case "$action" in
         build)
             for version in "${versions[@]}"; do
-               build_base_image $version
+               build $version
             done
             ;;
          
         test)
             for version in "${versions[@]}"; do
-               test_base_image $version
+               test $version
             done
             ;;
 
         push)
             for version in "${versions[@]}"; do
-               push_base_image $version
+               push $version
             done
             ;;
     esac
