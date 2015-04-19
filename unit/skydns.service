@@ -1,0 +1,24 @@
+[Unit]
+Description=SkyDNS service
+
+Requires=etcd.service
+After=etcd.service
+
+Requires=docker.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+
+ExecStartPre=-/usr/bin/docker kill skydns
+ExecStartPre=-/usr/bin/docker rm skydns
+ExecStartPre=/usr/bin/docker pull skynetservices/skydns
+
+ExecStart=/usr/bin/docker run --rm --name skydns \
+  -e "ETCD_MACHINES=http://$private_ipv4:4001" \
+  -e "SKYDNS_ADDR=0.0.0.0:53" \
+  -e "SKYDNS_DOMAIN=gainmaster.local" \
+  -p 53:53/udp \
+  -p 53:53/tcp \
+  skynetservices/skydns

@@ -6,55 +6,60 @@ cd $(dirname "${BASH_SOURCE[0]}")
 
 if [[ -z $(which docker) ]]; then
     echo "Missing docker, which is required for building, testing and pushing."
-    exit 2
+    exit 3
 fi
 
 declare IMAGE_NAME="bachelorthesis/development-environment"
-declare BASE_IMAGES_DIRECTORY="./base-image"
+declare MACHINE_DIRECTORY="./machine"
 
 
-function build_base_image() {
-    base_image="${1}"
-    base_image_directory="${BASE_IMAGES_DIRECTORY}/${base_image}"
+function build() {
+    image="${1}"
+    directory="${MACHINE_DIRECTORY}/${image}"
 
-    if [ ! -d "$base_image_directory" ]; then
-    	echo "Unable to find ${base_image}'s directory."
+    if [ ! -d "$directory" ]; then
+        echo "Cant build image ${IMAGE_NAME}:${image}, the image does not exist"
         exit 1
     fi
 
-    while read tag; do
-        docker build -t "${IMAGE_NAME}:${tag}" "${base_image_directory}"
-    done < "${base_image_directory}/tags"
+    docker build -t "${IMAGE_NAME}:${image}" "${directory}"
 }
 
 
-function test_base_image() {
-    base_image="${1}"
-    base_image_directory="${BASE_IMAGES_DIRECTORY}/${base_image}"
+function test() {
+    image="${1}"
+    directory="${MACHINE_DIRECTORY}/${image}"
 
-	docker history "${IMAGE_NAME}:${base_image}" 2> /dev/null
-
-	if [ $? -eq 1 ]; then
-		echo "Unable to test ${IMAGE_NAME}:${base_image}, the image does not exist."
+    if [ ! -d "$directory" ]; then
+        echo "Cant build image ${IMAGE_NAME}:${image}, the image does not exist"
         exit 1
     fi
 
-    if [[ -z $(which bats) ]]; then
-        echo "Missing bats, which is required for testing."
+	docker history "${IMAGE_NAME}:${image}" 2> /dev/null
+
+    if [ $? -eq 1 ]; then
+        echo "Cant test ${IMAGE_NAME}:${image}, the image is not built"
         exit 2
     fi
 
-    bats "${base_image_directory}/test.bats"
+    #bats "${base_image_directory}/test.bats"
 }
 
 
-function push_base_image() {
-    base_image="${1}"
-    base_image_directory="${BASE_IMAGES_DIRECTORY}/${base_image}"
+function push() {
+    image="${1}"
+    directory="${MACHINE_DIRECTORY}/${image}"
 
-    if [ ! -d "$base_image_directory" ]; then
-    	echo "Unable to find ${IMAGE_NAME}:${base_image}'s directory."
-    	exit 1
+    if [ ! -d "$directory" ]; then
+        echo "Cant build image ${IMAGE_NAME}:${image}, the image does not exist"
+        exit 1
+    fi
+
+    docker history "${IMAGE_NAME}:${image}" 2> /dev/null
+
+    if [ $? -eq 1 ]; then
+        echo "Cant test ${IMAGE_NAME}:${image}, the image is not built"
+        exit 2
     fi
 
     [ -z "${DOCKER_EMAIL}" ]    && { echo "Need to set DOCKER_EMAIL";    exit 1; }
@@ -63,25 +68,11 @@ function push_base_image() {
 
     if [[ $EUID -ne 0 ]]; then
         sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+        sudo docker push "${IMAGE_NAME}:${image}"
     else
         docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+        sudo docker push "${IMAGE_NAME}:${image}"
     fi
-
-    while read tag; do
-        docker history "${IMAGE_NAME}:${tag}" 2> /dev/null
-
-        if [ $? -eq 1 ]; then
-            echo "Cant push ${IMAGE_NAME}:${tag}, the image does not exist."
-            exit 1
-        fi
-        
-        if [[ $EUID -ne 0 ]]; then
-            sudo docker push "${IMAGE_NAME}:${tag}"
-        else
-            docker push "${IMAGE_NAME}:${tag}"
-        fi
-
-    done < "${base_image_directory}/tags"
 }
 
 
