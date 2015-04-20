@@ -1,7 +1,7 @@
-FROM bachelorthesis/development-environment:archlinux
+FROM bachelorthesis/development-machine:archlinux
 
 RUN pacman-install zsh nano
-RUN add-user knut /usr/bin/zsh
+RUN add-sudo-user knut /usr/bin/zsh
 
 USER knut
 

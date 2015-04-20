@@ -1,15 +1,13 @@
-FROM bachelorthesis/development-environment:archlinux
+FROM bachelorthesis/development-machine:archlinux
 
 RUN pacman-install zsh nano
-RUN add-user andreas /usr/bin/zsh
+RUN add-sudo-user andreas /usr/bin/zsh
 
 USER andreas
 
 WORKDIR /home/andreas
 ADD ./ ./
 
-# base-devel ?
-#RUN sudo pacman -U ondir-0.2.2-3-x86_64.pkg.tar.xz --noconfirm
 RUN \
   git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh && \
   rm Dockerfile && \
