@@ -1,0 +1,1 @@
+alias pp="cd /projects"

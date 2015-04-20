@@ -1,12 +1,18 @@
 #cloud-config
 
 coreos:
+
   etcd:
     addr: $private_ipv4:4001
     peer-addr: $private_ipv4:7001
     discovery: https://discovery.etcd.io/<token>
+
   fleet:
     public-ip: $private_ipv4
+
+  update:
+    reboot-strategy: off
+
   units:
     - name: etcd.service
       command: start
@@ -22,10 +28,10 @@ coreos:
           [Socket]
           ListenStream=$private_ipv4:2375
 
-    - name: dev-machine.service
+    - name: development-machine.service
       content: |
         [Unit]
-        Description=machine
+        Description=Development machine
         After=docker.service
         Requires=docker.service
 
@@ -95,8 +101,8 @@ coreos:
         Type=oneshot
         ExecStart=/usr/bin/etcdctl set /skydns/local/gainmaster/nodes/coreos '{"host":"$private_ipv4"}'
 
-    - name: docker-etcd-registrator.service
-      command: start
+    - name: registrator.service
+      command: enable
       content: |
         [Unit]
         Description=Docker etcd registrator service
@@ -120,7 +126,7 @@ coreos:
           gliderlabs/registrator etcd://$private_ipv4:4001/registrator -resync 5
 
     - name: vulcand.service
-      command: start
+      command: enable
       content: |
         [Unit]
         Description=Vulcand HTTP service
@@ -150,7 +156,7 @@ coreos:
           --etcd=http://$private_ipv4:4001
 
     - name: vulcand-skydns-registrator.service
-      command: start
+      command: enable
       content: |
           [Unit]
           Description=Register Vulcand HTTP service in SkyDNS

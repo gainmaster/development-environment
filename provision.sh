@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
 
-cd $(dirname "${BASH_SOURCE[0]}")
+PROFILE=${1:-default}
 
-if [ -z "$1" ]; then 
-	exit 2 
-fi
-if [ ! -d "/projects/development-environment/profile/$1" ]; then 
-	exit 2 
+if [ ! -d "/projects/development-environment/profile/$profile" ]; then 
+    echo "Unable to find profile: $PROFILE, provisioning default profile"
+    PROFILE=default
 fi
 
+# Go superuser!
 sudo su
 
-## if directory is empty
-systemctl stop dev-machine
+# Clean up
+systemctl stop development-machine.service
 rm -rf /machine && mkdir /machine
-docker build -t machine /projects/development-environment/profile/$1
-docker export "$(docker create --name machine machine true)" | tar -x -C /machine
-docker rm machine
-docker rmi machine
-systemctl enable dev-machine
-systemctl start dev-machine
+
+# Build development-machine
+docker build -t development-machine /projects/development-environment/profile/$1
+docker export "$(docker create --name development-machine development-machine true)" | tar -x -C /machine
+docker rm development-machine && docker rmi development-machine
+
+# Enable and start machine
+systemctl enable development-machine.service
+systemctl start development-machine.service
 
 # Load host spesific envorinment
 . <(sed '/^export/!s/^/export /' "/etc/metadata")
