@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
     config.vm.network :forwarded_port, guest: 2200, host: 2200
 
     config.vm.synced_folder "../", "/projects", 
-      id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+      id: "core", :nfs => true, :mount_options => ['nolock,vers=3,tcp']
 
     config.vm.provision :file, 
       :source      => "#{CLOUD_CONFIG_LOCAL_FILE}", 
@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
       :inline     => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", 
       :privileged => true
 
-    config.vm.provision :shell, path: "provision.sh", args: ENV['GAINMASTER_PROFILE']
+    config.vm.provision :shell, path: "provision.sh", args: ENV['GAINMASTER_PROFILE'], privileged: true
   end
 
 end
