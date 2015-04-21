@@ -21,7 +21,7 @@ coreos:
         content: |
           [Socket]
           ListenStream=$private_ipv4:2375
-    - name: dev-machine.service
+    - name: development-machine.service
       content: |
         [Unit]
         Description=machine

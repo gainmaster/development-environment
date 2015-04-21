@@ -7,11 +7,8 @@ if [ ! -d "/projects/development-environment/profile/$profile" ]; then
     PROFILE=default
 fi
 
-# Go superuser!
-sudo su
-
 # Clean up
-systemctl stop dev-machine
+systemctl stop development-machine
 rm -rf /machine && mkdir /machine
 
 # Build development-machine
@@ -21,8 +18,8 @@ docker rm development-machine
 docker rmi development-machine
 
 # Enable and start machine
-systemctl enable dev-machine
-systemctl start dev-machine
+systemctl enable development-machine
+systemctl start development-machine
 
 # Load host spesific envorinment
 . <(sed '/^export/!s/^/export /' "/etc/metadata")
