@@ -10,6 +10,7 @@ fi
 # Clean up
 systemctl stop development-machine
 rm -rf /machine && mkdir /machine
+rm -rf /volumes && mkdir /volumes
 
 # Build development-machine
 docker build -t development-machine /projects/development-environment/profile/$1
