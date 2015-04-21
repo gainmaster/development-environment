@@ -1,4 +1,4 @@
-FROM bachelorthesis/archlinux:base-devel
+FROM gainmaster/archlinux:base-devel
 
 RUN pacman-install git vim wget sqlite openssh screen dnsutils
 RUN aur-install ondir

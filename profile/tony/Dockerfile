@@ -1,4 +1,4 @@
-FROM bachelorthesis/development-machine:archlinux
+FROM gainmaster/development-machine:archlinux
 
 RUN pacman-install zsh
 RUN add-sudo-user tony /usr/bin/zsh

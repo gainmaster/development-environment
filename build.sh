@@ -9,7 +9,7 @@ if [[ -z $(which docker) ]]; then
     exit 3
 fi
 
-declare IMAGE_NAME="bachelorthesis/development-machine"
+declare IMAGE_NAME="gainmaster/development-machine"
 declare MACHINE_DIRECTORY="./machine"
 
 
