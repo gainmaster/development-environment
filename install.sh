@@ -61,14 +61,23 @@ case "$1" in
         gainmaster status
         ;;
 
-    status)
+    provision)
+        stat=$(gainmaster status);
+        if [ "$stat" == "Running" ]; then
             cd $GAINMASTER_DIRECTORY
-            stat=$(vagrant status 2>/dev/null | grep gainmaster-coreos | rev | cut -d'(' -f2 | cut -c2-8 | rev) 
-            if [ "$stat" == "running" ]; then
-                echo "Running"
-                exit 0
-            fi
-            echo "Not running"
+            vagrant provision
+        fi
+        gainmaster status
+        ;;
+
+    status)
+        cd $GAINMASTER_DIRECTORY
+        stat=$(vagrant status 2>/dev/null | grep gainmaster-coreos | rev | cut -d'(' -f2 | cut -c2-8 | rev) 
+        if [ "$stat" == "running" ]; then
+            echo "Running"
+            exit 0
+        fi
+        echo "Not running"
         ;;
 
     start)
@@ -80,3 +89,4 @@ case "$1" in
         fi
         ;;
 esac
+EOF
