@@ -11,17 +11,18 @@ fi
 sudo su
 
 # Clean up
-systemctl stop development-machine.service
+systemctl stop dev-machine
 rm -rf /machine && mkdir /machine
 
 # Build development-machine
 docker build -t development-machine /projects/development-environment/profile/$1
 docker export "$(docker create --name development-machine development-machine true)" | tar -x -C /machine
-docker rm development-machine && docker rmi development-machine
+docker rm development-machine
+docker rmi development-machine
 
 # Enable and start machine
-systemctl enable development-machine.service
-systemctl start development-machine.service
+systemctl enable dev-machine
+systemctl start dev-machine
 
 # Load host spesific envorinment
 . <(sed '/^export/!s/^/export /' "/etc/metadata")
