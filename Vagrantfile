@@ -60,6 +60,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.network :private_network, ip: "192.168.11.100"
+    
+    config.vm.network :forwarded_port, host: 2200, guest: 2200
 
     config.vm.synced_folder "../", "/projects", 
       id: "projects", :nfs => true, :mount_options => ['nolock,vers=3,tcp']

@@ -35,7 +35,7 @@ case "$1" in
 
     login)
         gainmaster start
-        ssh -p 2200 -A -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $GAINMASTER_PROFILE@192.168.11.100
+        ssh -p 2200 -A -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $GAINMASTER_PROFILE@127.0.0.1
         ;;
          
     destroy)
