@@ -9,6 +9,7 @@ Vagrant.require_version ">= 1.6.0"
 
 CLOUD_CONFIG_FILE = File.join(File.dirname(__FILE__), "cloud-config.yml")
 CLOUD_CONFIG_LOCAL_FILE = File.join(File.dirname(__FILE__), "cloud-config-local.yml")
+VAGRANT_CONFIG = File.join(File.dirname(__FILE__), "vagrant-config.rb")
 
 # Automatically replace the cloud-config.yaml discovery token on 'vagrant up'
 token = open('https://discovery.etcd.io/new').read
@@ -19,8 +20,14 @@ data['coreos']['etcd']['discovery'] = token
 yaml = YAML.dump(data)
 File.open(CLOUD_CONFIG_LOCAL_FILE, 'w') { |file| file.write("#cloud-config\n\n#{yaml}") }
 
-# Configuration options
+# Default configuration options
 $update_channel = "stable"
+$vm_memory = 1024
+$vm_cpus = 1
+
+if File.exist?(VAGRANT_CONFIG)
+  require VAGRANT_CONFIG
+end
 
 Vagrant.configure("2") do |config|
   # Always use Vagrants insecure key
@@ -45,14 +52,17 @@ Vagrant.configure("2") do |config|
   config.vm.define vm_name = "gainmaster-coreos" do |config|
     config.vm.hostname = vm_name
 
+    config.vm.provider :virtualbox do |vb|
+      vb.memory = $vm_memory
+      vb.cpus = $vm_cpus
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    end
+
     config.vm.network :private_network, ip: "192.168.11.100"
 
-    config.vm.network :forwarded_port, guest: 80, host: 8080
-    config.vm.network :forwarded_port, guest: 9000, host: 9000
-    config.vm.network :forwarded_port, guest: 2200, host: 2200
-
     config.vm.synced_folder "../", "/projects", 
-      id: "core", :nfs => true, :mount_options => ['nolock,vers=3,tcp']
+      id: "projects", :nfs => true, :mount_options => ['nolock,vers=3,tcp']
 
     config.vm.provision :file, 
       :source      => "#{CLOUD_CONFIG_LOCAL_FILE}", 

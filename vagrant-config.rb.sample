@@ -1,0 +1,3 @@
+# Customize VMs
+$vm_memory = 4096
+$vm_cpus = 2
