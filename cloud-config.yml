@@ -74,4 +74,4 @@ write_files:
     permissions: 644
     content: |
         GAINMASTER_DOMAIN=gainmaster.local
-        SKYDNS_DOMAIN_PATH=local/gainmaster
+        GAINMASTER_SKYDNS_DOMAIN_PATH=local/gainmaster
