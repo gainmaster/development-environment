@@ -78,10 +78,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias pp="cd /projects"
-
-eval_ondir() {
-  eval "`ondir \"$OLDPWD\" \"$PWD\"`"
-}
-chpwd_functions=( eval_ondir $chpwd_functions )

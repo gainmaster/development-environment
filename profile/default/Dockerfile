@@ -1,1 +1,0 @@
-FROM bachelorthesis/development-environment:archlinux
