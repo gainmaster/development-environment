@@ -23,7 +23,7 @@ systemctl enable development-machine
 systemctl start development-machine
 
 # Load host spesific envorinment
-. <(sed '/^export/!s/^/export /' "/etc/metadata")
+. <(sed '/^export/!s/^/export /' "/etc/coreos_metadata")
 
 # Enable access to CoreOS docker
 echo "Adding DOCKER_HOST to environment"
