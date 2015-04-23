@@ -2,7 +2,7 @@
 
 coreos:
     etcd:
-        addr: $private_ipv4:4001
+        addr     : $private_ipv4:4001
         peer-addr: $private_ipv4:7001
         discovery: https://discovery.etcd.io/<token>
 
@@ -11,23 +11,23 @@ coreos:
         metadata : 'location=developer,public=true,name=coreos1,role=gainmaster'
 
     units:
-      - name    : etcd.service
-        command : start
+      - name   : etcd.service
+        command: start
 
-      - name    : fleet.service
-        command : start
+      - name   : fleet.service
+        command: start
 
-      - name    : docker.socket
-        command : start
+      - name   : docker.socket
+        command: start
         drop-ins: 
-          - name   : 30-ListenStream.conf
+          - name: 30-ListenStream.conf
             content: |
                 [Socket]
                 ListenStream=$private_ipv4:2375
 
-      - name    : development-machine.service
-        enable  : true
-        content : |
+      - name: development-machine.service
+        enable: true
+        content: |
             [Unit]
             Description=machine
             After=docker.service
@@ -64,14 +64,14 @@ coreos:
 
 write_files:
   - path: /etc/coreos_metadata
-    permissions: 0644
+    permissions: 644
     content: |
-      PUBLIC_IPV4=$public_ipv4
-      PRIVATE_IPV4=$private_ipv4
-      SHARED_DATA=/mnt/shared
+        PUBLIC_IPV4=$public_ipv4
+        PRIVATE_IPV4=$private_ipv4
+        SHARED_DATA=/mnt/shared
 
   - path: /etc/gainmaster_metadata
-    permissions: 0644
+    permissions: 644
     content: |
-      GAINMASTER_DOMAIN=gainmaster.local
-      SKYDNS_DOMAIN_PATH=local/gainmaster
+        GAINMASTER_DOMAIN=gainmaster.local
+        SKYDNS_DOMAIN_PATH=local/gainmaster

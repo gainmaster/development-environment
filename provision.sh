@@ -12,6 +12,11 @@ systemctl stop development-machine
 rm -rf /machine && mkdir /machine
 rm -rf /volumes && mkdir /volumes
 
+# Units
+fleetctl list-unit-files --no-legend=true | awk 'NR =1 {print $1}' | xargs -l fleetctl destroy
+for unit in /projects/development-environment/unit/*; do fleetctl submit $unit; done
+fleetctl start docker-etcd-registrator.service skydns.service vulcand.service
+
 # Build development-machine
 docker build -t development-machine /projects/development-environment/profile/$1
 docker export "$(docker create --name development-machine development-machine true)" | tar -x -C /machine
