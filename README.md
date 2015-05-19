@@ -1,10 +1,10 @@
 # Development Environment
 
-[![Build Status](http://jenkins.hesjevik.im/buildStatus/icon?job=development-environment)](http://jenkins.hesjevik.im/job/development-environment/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg?style=plastic)][docker_hub_repository]
+[![Build Status](http://ci.hesjevik.im/buildStatus/icon?job=development-environment)](http://ci.hesjevik.im/job/development-environment/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg?style=plastic)][docker_hub_repository]
 
 This repository contains **Dockerfiles** for development machines, and a **Vagrantfile** for a local CoreOS instance. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
 
-[docker_hub_repository]: https://registry.hub.docker.com/u/bachelorthesis/development-environment/
+[docker_hub_repository]: https://registry.hub.docker.com/u/gainmaster/development-environment/
 
 ### Dependencies
 
@@ -52,7 +52,7 @@ To take full use of the internal DNS you should add it as a static DNS resolver 
 * `gainmaster destroy` ->  Destroys CoreOS *(vagrant destroy)*
 * `gainmaster status` -> Get CoreOS status *(Running / Not running)*
 
-## Refrences
+## References
 
 These resources have been helpful when creating this repository:
 
